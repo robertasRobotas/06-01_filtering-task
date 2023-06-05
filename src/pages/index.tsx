@@ -4,11 +4,13 @@ import uniqid from "uniqid";
 
 const Home = () => {
   const [inputText, setInputText] = useState("");
+  const [filterText, setFilterText] = useState("");
   const [library, setLibrary] = useState(["labas"]);
 
   return (
     <div className={styles.wrapper}>
       <input
+        placeholder="Add some text"
         onChange={(event) => setInputText(event.target.value)}
         value={inputText}
       />
@@ -20,6 +22,19 @@ const Home = () => {
       >
         Add word
       </button>
+
+      <input
+        placeholder="Type some text to filter"
+        onChange={(event) => {
+          console.log("hitttt");
+          const newText = event.target.value;
+          setFilterText(newText);
+          setLibrary((prevState) => [
+            ...prevState.filter((word) => word.includes(newText)),
+          ]);
+        }}
+        value={filterText}
+      />
       <div>
         {library.map((word) => {
           return (
